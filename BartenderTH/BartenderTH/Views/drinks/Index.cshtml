@@ -1,0 +1,77 @@
+﻿@model IEnumerable<BartenderTH.Models.drinks>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="@Url.Content("~/Scripts/knockout-2.1.0.js")"></script>
+    <script type="text/javascript">
+        function drinksViewModel() {
+            var self = this;
+            self.drinks = ko.observableArray();
+
+            var baseUri = '@ViewBag.ApiUrl';
+                
+            self.create = function (formElement) {
+                // If the form data is valid, post the serialized form data to the web API.
+                $(formElement).validate();
+                if ($(formElement).valid()) {
+                    $.post(baseUri, $(formElement).serialize(), null, "json")
+                        .done(function (o) {
+                            // Add the new product to the view-model.
+                            self.drinks.push(o);
+                        });
+                }
+            }
+
+            self.update = function (drinks) {
+                $.ajax({ type: "PUT", url: baseUri + '/' + product.Id, data: product });
+            }
+
+            self.remove = function (drinks) {
+                // First remove from the server, then from the view-model.
+                $.ajax({ type: "DELETE", url: baseUri + '/' + product.Id })
+                    .done(function () { self.drinks.remove(product); });
+            }
+
+            $.getJSON(baseUri, self.drinks);
+        }
+
+        $(document).ready(function () {
+            ko.applyBindings(new drinksViewModel());
+        })
+
+
+    </script>
+}
+
+@{
+    ViewBag.Title = "Drinks";
+}
+
+<div class="content">
+    <div class="float-left">
+        <ul id="update-drinks" data-bind="foreach: drinks">
+            <li>
+                <div><div class="item">Drink ID</div><span></span></div>
+                <div><div class="item">Name</div> <input type="text" /></div>
+                <div><div class="item">Price ($)</div> <input type="text" /></div>
+                <div>
+                    <input type="button" value="Update" />
+                    <input type="button" value="Delete Item" />
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="float-right">
+        <h2>Add New Product</h2>
+        <form id="product">
+            @Html.ValidationSummary(true)
+            <fieldset>
+                <legend>Contact</legend>
+                @Html.EditorForModel()
+                <p>
+                    <input type="submit" value="Save" />
+                </p>
+            </fieldset>
+        </form>
+    </div>
+</div>

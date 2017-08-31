@@ -20,6 +20,9 @@ namespace BartenderTH.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<order> order { get; set; }
+        public DbSet<drinks> drinks { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
@@ -29,5 +32,7 @@ namespace BartenderTH.Models
         {
             return new ApplicationDbContext();
         }
+
+        //public System.Data.Entity.DbSet<BartenderTH.Models.drinks> drinks { get; set; }
     }
 }

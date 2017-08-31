@@ -20,11 +20,13 @@ namespace BartenderTH.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult drinks()
         {
-            ViewBag.Message = "Your contact page.";
+            string apiUri = Url.HttpRouteUrl("DefaultApi", new { controller = "drinks", });
+            ViewBag.ApiUrl = new Uri(Request.Url, apiUri).AbsoluteUri.ToString();
 
             return View();
         }
+
     }
 }
