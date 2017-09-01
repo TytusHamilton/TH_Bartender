@@ -12,7 +12,7 @@ namespace BartenderTH
     {
         protected void Application_Start()
         {
-            System.Data.Entity.Database.SetInitializer(new BartenderTH.Models.DrinksContextInitializer());
+            System.Data.Entity.Database.SetInitializer(new BartenderTH.Models.OrdersContextInitializer());
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

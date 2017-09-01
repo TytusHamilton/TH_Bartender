@@ -1,4 +1,5 @@
-﻿using System;
+﻿/*
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -29,7 +30,9 @@ namespace BartenderTH.Models
             context.Orders.Add(Order);
             od.ForEach(o => context.Orders.Add(o));
             */
-            context.SaveChanges();
+            //context.SaveChanges();
+            /*
         }
     }
 }
+*/

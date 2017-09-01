@@ -20,9 +20,9 @@ namespace BartenderTH.Controllers
             return View();
         }
 
-        public ActionResult drinks()
+        public ActionResult Admin()
         {
-            string apiUri = Url.HttpRouteUrl("DefaultApi", new { controller = "drinks", });
+            string apiUri = Url.HttpRouteUrl("Default", new { controller = "admin", });
             ViewBag.ApiUrl = new Uri(Request.Url, apiUri).AbsoluteUri.ToString();
 
             return View();

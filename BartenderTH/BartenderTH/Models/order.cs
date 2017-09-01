@@ -12,6 +12,8 @@ namespace BartenderTH.Models
     {
         public int Id { get; set; }
         public int drinkId { get; set; }
+        public string Customer { get; set; }
+        public int Quantity { get; set; }
 
         public drinks drinks { get; set; }
     }

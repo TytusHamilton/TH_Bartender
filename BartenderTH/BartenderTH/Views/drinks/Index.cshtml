@@ -1,4 +1,10 @@
-﻿@model IEnumerable<BartenderTH.Models.drinks>
+﻿<!--
+@model IEnumerable<BartenderTH.Models.drinks>
+
+@{ 
+    ViewBag.Title = "drinks";
+}
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript" src="@Url.Content("~/Scripts/knockout-2.1.0.js")"></script>
@@ -21,14 +27,14 @@
                 }
             }
 
-            self.update = function (drinks) {
-                $.ajax({ type: "PUT", url: baseUri + '/' + product.Id, data: product });
+            self.update = function (drink) {
+                $.ajax({ type: "PUT", url: baseUri + '/' + drinks.Id, data: drink });
             }
 
-            self.remove = function (drinks) {
+            self.remove = function (drink) {
                 // First remove from the server, then from the view-model.
-                $.ajax({ type: "DELETE", url: baseUri + '/' + product.Id })
-                    .done(function () { self.drinks.remove(product); });
+                $.ajax({ type: "DELETE", url: baseUri + '/' + drinks.Id })
+                    .done(function () { self.drinks.remove(drinks); });
             }
 
             $.getJSON(baseUri, self.drinks);
@@ -42,28 +48,24 @@
     </script>
 }
 
-@{
-    ViewBag.Title = "Drinks";
-}
-
 <div class="content">
     <div class="float-left">
         <ul id="update-drinks" data-bind="foreach: drinks">
             <li>
-                <div><div class="item">Drink ID</div><span></span></div>
-                <div><div class="item">Name</div> <input type="text" /></div>
-                <div><div class="item">Price ($)</div> <input type="text" /></div>
+                <div><div class="item">Product ID</div><span data-bind="text: $data.Id"></span></div>
+                <div><div class="item">Name</div> <input type="text" data-bind="value: $data.Name" /></div>
+                <div><div class="item">Price ($)</div> <input type="text" data-bind="value: $data.Price"  /></div>
                 <div>
-                    <input type="button" value="Update" />
-                    <input type="button" value="Delete Item" />
+                    <input type="button" value="Update" data-bind="click: $root.update" />
+                    <input type="button" value="Delete Item" data-bind="click: $root.remove" />
                 </div>
             </li>
         </ul>
     </div>
 
     <div class="float-right">
-        <h2>Add New Product</h2>
-        <form id="product">
+        <h2>Add New Drink</h2>
+        <form id="addDrink" data-bind="submit: create">
             @Html.ValidationSummary(true)
             <fieldset>
                 <legend>Contact</legend>
@@ -75,3 +77,4 @@
         </form>
     </div>
 </div>
+    -->
