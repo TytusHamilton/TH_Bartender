@@ -20,7 +20,7 @@ namespace BartenderTH.Models
         }
 
         public DbSet<order> Orders { get; set; }
-        public DbSet<drinks> drinks { get; set; }
-        //public System.Data.Entity.DbSet<BartenderTH.Models.drinks> drinks { get; set; }
+        //public DbSet<drinks> drinks { get; set; }
+        public System.Data.Entity.DbSet<BartenderTH.Models.drinks> drinks { get; set; }
     }
 }
